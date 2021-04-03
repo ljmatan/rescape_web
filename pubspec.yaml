@@ -1,0 +1,34 @@
+name: rescape_web
+description: A new Flutter project.
+
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  shared_preferences: ^2.0.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  http: ^0.13.1
+  shared_preferences: ^2.0.5
+  file_picker: ^3.0.0
+  intl: ^0.17.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+    
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand.ttf
