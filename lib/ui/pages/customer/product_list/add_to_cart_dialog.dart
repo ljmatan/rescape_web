@@ -100,13 +100,13 @@ class _AddToCartMobileState extends State<AddToCartMobile> {
                       Row(
                         children: [
                           AddToCartMeasureOption(
+                            enabled: widget.product.inPackage != null,
                             measureController: _measureController,
                             initialData: _measureType,
                             type: widget.product.measure,
                             label: widget.product.measure == Measure.qty
                                 ? 'Komada'
                                 : 'Kila',
-                            enabled: widget.product.measure == Measure.kg,
                           ),
                           const SizedBox(width: 10),
                           AddToCartMeasureOption(
@@ -193,9 +193,9 @@ class _AddToCartMobileState extends State<AddToCartMobile> {
                                       : double.parse(_amountController.text) *
                                           widget.product.inPackage!
                                   : _measureType == Measure.qty
-                                      ? int.parse(_amountController.text)
-                                      : int.parse(_amountController.text) *
-                                          widget.product.inPackage!;
+                                  ? int.parse(_amountController.text)
+                                  : int.parse(_amountController.text) *
+                                      widget.product.inPackage!;
                               final price = ((widget.product.price *
                                       ((100 + widget.product.vat) / 100)) *
                                   ((100 - (discount ?? 0)) / 100));
@@ -206,7 +206,7 @@ class _AddToCartMobileState extends State<AddToCartMobile> {
                                   amount: amount,
                                   vat: widget.product.vat,
                                   price: amount * price,
-                                  measure: _measureType,
+                                  measure: widget.product.measure,
                                   discount: discount,
                                 ),
                               );
