@@ -85,4 +85,7 @@ abstract class OrdersAPI {
 
     return orders;
   }
+
+  static Future<Map> delete(String orderId) async => jsonDecode(
+      (await HTTPHelper.post({'orderId': orderId}, '/orders/delete')).body);
 }

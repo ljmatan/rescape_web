@@ -24,6 +24,8 @@ class _OrdersPageState extends State<OrdersPage> {
     SelectedFilterController.init();
   }
 
+  void _rebuild() => setState(() {});
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -126,6 +128,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                             builder: (context) =>
                                                 AdminOrderDisplay(
                                               order: order,
+                                              rebuild: _rebuild,
                                             ),
                                           ),
                                         ),

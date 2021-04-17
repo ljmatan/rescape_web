@@ -3,12 +3,16 @@ import 'package:intl/intl.dart';
 import 'package:rescape_web/data/companies/companies.dart';
 import 'package:rescape_web/logic/api/companies.dart';
 import 'package:rescape_web/logic/api/models/order_model.dart';
+import 'package:rescape_web/logic/api/orders.dart';
 import 'package:rescape_web/other/measures.dart';
+import 'package:rescape_web/ui/shared/popup/confirm_deletion_popup.dart';
+import 'package:rescape_web/ui/view/bloc/popup_controller.dart';
 
 class AdminOrderDisplay extends StatelessWidget {
   final OrderModel order;
+  final Function rebuild;
 
-  AdminOrderDisplay({required this.order});
+  AdminOrderDisplay({required this.order, required this.rebuild});
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +21,19 @@ class AdminOrderDisplay extends StatelessWidget {
       child: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 4, 8),
+            padding: const EdgeInsets.fromLTRB(8, 8, 4, 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                IconButton(
+                  icon: Icon(Icons.close, color: Colors.red.shade300),
+                  onPressed: () => PopupController.show(ConfirmDeletionPopup(
+                      future: () async =>
+                          await OrdersAPI.delete(order.id).then((value) {
+                            if (!value['error']) rebuild();
+                            return value;
+                          }))),
+                ),
                 RichText(
                   text: TextSpan(
                     style: const TextStyle(
