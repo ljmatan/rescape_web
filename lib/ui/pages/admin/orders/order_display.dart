@@ -34,7 +34,9 @@ class AdminOrderDisplay extends StatelessWidget {
                               if (!value['error']) rebuild();
                               return value;
                             }))),
-                  ),
+                  )
+                else
+                  const SizedBox(width: 8),
                 RichText(
                   text: TextSpan(
                     style: const TextStyle(
