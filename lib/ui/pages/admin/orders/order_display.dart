@@ -25,15 +25,16 @@ class AdminOrderDisplay extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
-                  icon: Icon(Icons.close, color: Colors.red.shade300),
-                  onPressed: () => PopupController.show(ConfirmDeletionPopup(
-                      future: () async =>
-                          await OrdersAPI.delete(order.id).then((value) {
-                            if (!value['error']) rebuild();
-                            return value;
-                          }))),
-                ),
+                if (MediaQuery.of(context).size.width > 896)
+                  IconButton(
+                    icon: Icon(Icons.close, color: Colors.red.shade300),
+                    onPressed: () => PopupController.show(ConfirmDeletionPopup(
+                        future: () async =>
+                            await OrdersAPI.delete(order.id).then((value) {
+                              if (!value['error']) rebuild();
+                              return value;
+                            }))),
+                  ),
                 RichText(
                   text: TextSpan(
                     style: const TextStyle(
